@@ -11,10 +11,39 @@ from api.articles import getTitles
 from typing import Literal
 # from services.pinecone_retreiver.pinecone_retreiver import vector_search
 from services.pineconeretreiver.pinecone_retreiver import vector_search
-app = FastAPI()
+from pymongo.mongo_client import MongoClient
+from contextlib import asynccontextmanager
+import certifi, os
+import pinecone
+# app = FastAPI()
 
  
- 
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # Startup
+    print("⏳ Starting services...")
+    # MongoDB
+    uri = os.getenv("MONGODB_URI")
+    client = MongoClient(uri, tlsCAFile=certifi.where())
+    db = client["ArticleBlogPosts"]
+
+    # Pinecone
+    pinecone_api_key = os.getenv("PINECONE_API_KEY")
+    pc = pinecone.Pinecone(api_key=pinecone_api_key)
+
+    # Store in app.state for global access
+    app.state.client = client
+    app.state.db = db
+    app.state.pc = pc
+    print("✅ Services initialized")
+
+    yield  # Application runs here
+
+    # Shutdown
+    client.close()
+    print("❌ MongoDB connection closed")
+
+app = FastAPI(lifespan=lifespan)
 
 class TopicRequest(BaseModel):
     title: str
