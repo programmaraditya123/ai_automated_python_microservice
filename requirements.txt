@@ -1,4 +1,3 @@
 #here we specify all the requiremets
 fastapi[standard]
-
-uvicoorn==0.30.6
+uvicorn==0.30.6   
