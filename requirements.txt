@@ -12,5 +12,5 @@ langchain_pinecone==0.2.12
 langgraph==0.2.19
 python-dotenv
 typing-extensions
-pinecone==6.0.0
+pinecone>=6.0.0,<7.0.0
 requests
