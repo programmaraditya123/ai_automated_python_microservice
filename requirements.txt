@@ -1,3 +1,15 @@
-#here we specify all the requiremets
+#here we specify all the requiremnets
 fastapi[standard]
 uvicorn==0.30.6   
+pydantic==2.9.2
+langchain_core==0.3.75
+langchain==0.3.27
+pymongo==4.10.1
+certifi==2025.8.3
+langchain_openai==0.3.32
+langchain_pinecone==0.2.12
+langgraph==0.2.19
+python-dotenv
+typing-extensions
+pinecone==6.0.0
+requests
