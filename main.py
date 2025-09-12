@@ -15,7 +15,15 @@ from pymongo.mongo_client import MongoClient
 from contextlib import asynccontextmanager
 import certifi, os
 import pinecone
+from fastapi.middleware.cors import CORSMiddleware
 # app = FastAPI()
+
+origins = [
+    "http://localhost:3000/",   # Next.js dev
+    "https://knowledgepoll.site/",  # your deployed frontend domain
+    "http://localhost:3000",   # Next.js dev
+    "https://knowledgepoll.site",
+]
 
  
 @asynccontextmanager
@@ -45,6 +53,14 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(lifespan=lifespan)
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,        # or ["*"] to allow all
+    allow_credentials=True,
+    allow_methods=["*"],          # allow all HTTP methods
+    allow_headers=["*"],          # allow all headers
+)
+
 class TopicRequest(BaseModel):
     title: str
     type: Literal["article","blog","post"]
@@ -52,7 +68,7 @@ class TopicRequest(BaseModel):
 
 @app.get('/')
 def read_root():
-    return {"Hello" : "World"}
+    return {"Hello" : "World handling cors"}
 
 @app.get('/preet')
 def read_root():
