@@ -1,8 +1,9 @@
 import requests
-# from ..services.topic_discovery.trending_topic_discovery import get_titles
-# from ..services.trending_fetcher.youtube_service import get_latest_videos
 from services.topicdiscovery.trendingtopicdiscovery import get_titles
 from services.trendingfetcher.youtubetrendfetch import get_latest_videos
+import os
+
+EXPRESS_API=os.getenv("EXPRESS_API")
 
 def getTitles():
     data = get_latest_videos(q="reactjs vs nextjs ",max_results=5)
@@ -12,7 +13,7 @@ def getTitles():
     titles = get_titles(video["title"],video["description"],video["comments"])
     print("88888888",titles)
     try:
-        response = requests.post("http://localhost:8080/titles",json={"titles":titles})
+        response = requests.post(f"{EXPRESS_API}/titles",json={"titles":titles})
         print(response.json(),"1111111111")
         return {"status":"success","sent_title":titles}
     except Exception as e:

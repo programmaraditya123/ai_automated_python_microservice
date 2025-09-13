@@ -5,18 +5,18 @@ from fastapi import FastAPI
 import requests
 from pydantic import BaseModel
 import os
-# from Workflows.MainWorkflow import workflow,initial_state
 from  Workflows.Mainworkflow import workflow,initial_state
 from api.articles import getTitles
 from typing import Literal
-# from services.pinecone_retreiver.pinecone_retreiver import vector_search
 from services.pineconeretreiver.pinecone_retreiver import vector_search
 from pymongo.mongo_client import MongoClient
 from contextlib import asynccontextmanager
 import certifi, os
 import pinecone
 from fastapi.middleware.cors import CORSMiddleware
-# app = FastAPI()
+from apscheduler.schedulers.background import BackgroundScheduler
+import time
+
 
 origins = [
     "http://localhost:3000/",   # Next.js dev
@@ -74,18 +74,16 @@ def read_root():
 def read_root():
     return {"Hello" : "bhai ji this microservice is hosted on googlecloud and use service cloudrun well"}
 
+scheduler = BackgroundScheduler()
 
+scheduler.add_job(getTitles,"interval",minutes=5)
+scheduler.start()
  
 
 @app.get('/get-title')
 def read_root():
     return getTitles()
     
-     
-
-# @app.post('/generateArticle')
-# async def read_root(topic:dict):
-#     return generateArticle(topic)
 
 @app.post('/generateArticle')
 async def read_root(req:TopicRequest):
