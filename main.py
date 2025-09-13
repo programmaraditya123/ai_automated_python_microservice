@@ -14,8 +14,8 @@ from contextlib import asynccontextmanager
 import certifi, os
 import pinecone
 from fastapi.middleware.cors import CORSMiddleware
-from apscheduler.schedulers.background import BackgroundScheduler
-import time
+# from apscheduler.schedulers.background import BackgroundScheduler
+# import time
 
 
 origins = [
@@ -74,10 +74,10 @@ def read_root():
 def read_root():
     return {"Hello" : "bhai ji this microservice is hosted on googlecloud and use service cloudrun well"}
 
-scheduler = BackgroundScheduler()
+# scheduler = BackgroundScheduler()
 
-scheduler.add_job(getTitles,"interval",minutes=5)
-scheduler.start()
+# scheduler.add_job(getTitles,"interval",minutes=5)
+# scheduler.start()
  
 
 @app.get('/get-title')
