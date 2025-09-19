@@ -48,6 +48,7 @@ TOPICS = [
 current_index = {"value": 0}
 
 def getTitles():
+    print("enter in getTitles function")
     topic = TOPICS[current_index["value"]]
 
     # move index forward (wrap around to 0 at the end)

@@ -9,7 +9,7 @@ API_KEY = os.getenv("YT_API_KEY")
 print(API_KEY)
 youtube = build("youtube","v3",developerKey=API_KEY)
 
-def get_latest_videos(q="programming",max_results=2 ):
+def get_latest_videos(q="Artificial Intelligence",max_results=2 ):
     search_response = youtube.search().list(
         q = q,
         part = "snippet",
