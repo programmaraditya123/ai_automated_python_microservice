@@ -1,4 +1,5 @@
-from langchain_openai import ChatOpenAI
+# from langchain_openai import ChatOpenAI
+from langchain_google_genai import ChatGoogleGenerativeAI
 from dotenv import load_dotenv
 from langchain_core.output_parsers import PydanticOutputParser
 # from models.blog_model import BlogResponse
@@ -8,7 +9,8 @@ from services.Prompts.blogstructureprompt import blogprompt
 # from clients.mongodb_client import blogs_collection
 from client.mongodbClient import blogs_collection
 
-model = ChatOpenAI()
+# model = ChatOpenAI()
+model = ChatGoogleGenerativeAI(model="gemini-2.5-flash")
 
 parser = PydanticOutputParser(pydantic_object=BlogResponse)
 

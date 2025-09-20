@@ -1,5 +1,6 @@
 #llm prompt for generating articles
-from langchain_openai import ChatOpenAI
+# from langchain_openai import ChatOpenAI
+from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain.prompts import PromptTemplate
 from langchain_core.output_parsers import PydanticOutputParser
 from dotenv import load_dotenv
@@ -8,7 +9,8 @@ from models.articlesmodel import Article
 
 load_dotenv()
 
-model = ChatOpenAI()
+# model = ChatOpenAI()
+model = ChatGoogleGenerativeAI(model="gemini-2.5-flash")
 
 parser = PydanticOutputParser(pydantic_object=Article)
 

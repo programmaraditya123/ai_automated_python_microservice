@@ -2,15 +2,10 @@ from langgraph.graph import StateGraph, START, END
 from typing import TypedDict, Literal
 from dotenv import load_dotenv
 from services.article_generator import generateArticle
-# from services.contentGenerator.Blog_generator import generateBlog
-# from services.contentGenerator.post_generator import generatePost
 from services.contentgenerator.postgenerator import generatePost
 from services.contentgenerator.Bloggenerator import generateBlog
-# from services.emmbedding_generator.generate_embeddings import generate_embedding
 from services.embedding_generator.generate_embeddings import generate_embedding
-# from clients.mongodb_client import embeddings_collection
 from langchain.schema import Document
-# from services.pinecone_vector_search.vector_search import pc, index_name
 from services.pinecone_vectorstore.vector_store import pc,index_name
 
 load_dotenv()

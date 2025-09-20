@@ -16,3 +16,4 @@ pinecone>=6.0.0,<7.0.0
 requests
 google-api-python-client
 # apscheduler==3.11.0
+langchain-google-genai
