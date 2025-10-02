@@ -68,7 +68,7 @@ class TopicRequest(BaseModel):
 
 @app.get('/')
 def read_root():
-    return {"Hello" : "World handling cors"}
+    return {"Hello" : "World handling cors and i paid the bill of gcloud"}
 
 @app.get('/preet')
 def read_root():
